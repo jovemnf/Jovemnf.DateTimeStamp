@@ -9,8 +9,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Title>Pacote .net core para trabalhar com DateTime</Title>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/jovemnf/Jovemnf.WebAPI.git</RepositoryUrl>
-    <DocumentationMarkdownURL>https://github.com/jovemnf/Jovemnf.WebAPI/blob/master/README.md</DocumentationMarkdownURL>
+    <RepositoryUrl>https://github.com/jovemnf/Jovemnf.DateTimeStamp.git</RepositoryUrl>
+    <DocumentationMarkdownURL>https://github.com/jovemnf/Jovemnf.DateTimeStamp/blob/master/README.md</DocumentationMarkdownURL>
   </PropertyGroup>
 
 </Project>
