@@ -140,6 +140,16 @@ namespace Jovemnf.DateTimeStamp
             return Math.Floor( getTimestamp() - timestamp );
         }
 
+        public bool isValid () {
+            try {
+                DateTime.Parse(this.getDiaMesAnoSomente());
+                return true;
+            } catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public string getDiaMesAno()
         {
             return String.Format("{0:dd/MM/yyyy HH:mm:ss}", _date_time);
