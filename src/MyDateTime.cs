@@ -16,7 +16,7 @@ namespace Jovemnf.DateTimeStamp
 
         public MyDateTime( double timestamp )
         {
-            _date_time = getDefault();
+            _date_time = GetDefault();
             _date_time = _date_time.AddSeconds(timestamp);
         }
         
@@ -61,20 +61,20 @@ namespace Jovemnf.DateTimeStamp
 
         public MyDateTime()
         {
-            _date_time = getDefault();
+            _date_time = GetDefault();
         }
 
-        protected DateTime getDefault()
+        protected DateTime GetDefault()
         {
             return new DateTime(1970, 1, 1, 0, 0, 0, 0);
         }
 
-        public DateTime getDateTime()
+        public DateTime GetDateTime()
         {
             return _date_time;
         }
 
-        public static MyDateTime fromIsoDateByNode(string data)
+        public static MyDateTime FromIsoDateByNode(string data)
         {
             try
             {
@@ -90,12 +90,26 @@ namespace Jovemnf.DateTimeStamp
             }
         }
 
+        public static MyDateTime FromDateTime(string data, string format = @"yyyy-MM-dd HH:mm:ss")
+        {
+            try
+            {
+                DateTime d;
+                DateTime.TryParseExact(data, format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out d);
+                return new MyDateTime(d);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public int HMin()
         {
             return Convert.ToInt32(_date_time.Hour.ToString().PadLeft(2, '0') + "" + _date_time.Minute.ToString().PadLeft(2, '0'));
         }
 
-        public MyDateTime byStrToTime(string str)
+        public MyDateTime ByStrToTime(string str)
         {
             try
             {
@@ -111,22 +125,22 @@ namespace Jovemnf.DateTimeStamp
             }
         }
 
-        public double getTimestamp()
+        public double GetTimestamp()
         {
-            DateTime origin = getDefault();
+            DateTime origin = GetDefault();
             TimeSpan diff = _date_time - origin;
             return Math.Floor(diff.TotalSeconds);
         }
 
-        public double getDiference(DateTime date)
+        public double GetDiference(DateTime date)
         {
             TimeSpan diff = _date_time - date;
             return Math.Floor(diff.TotalSeconds);
         }
 
-        public double getDiference(MyDateTime date)
+        public double GetDiference(MyDateTime date)
         {
-            return getDiference(date._date_time);
+            return GetDiference(date._date_time);
         }
 
         public TimeSpan GetDiff(DateTime date)
@@ -135,14 +149,14 @@ namespace Jovemnf.DateTimeStamp
             return diff;
         }
 
-        public double getDiference(double timestamp)
+        public double GetDiference(double timestamp)
         {
-            return Math.Floor( getTimestamp() - timestamp );
+            return Math.Floor( GetTimestamp() - timestamp );
         }
 
-        public bool isValid () {
+        public bool IsValid () {
             try {
-                DateTime.Parse(this.getDiaMesAnoSomente());
+                DateTime.Parse(this.GetDiaMesAnoSomente());
                 return true;
             } catch (Exception)
             {
@@ -150,27 +164,27 @@ namespace Jovemnf.DateTimeStamp
             }
         }
 
-        public string getDiaMesAno()
+        public string GetDiaMesAno()
         {
             return String.Format("{0:dd/MM/yyyy HH:mm:ss}", _date_time);
         }
 
-        public string getAnoMesDia()
+        public string GetAnoMesDia()
         {
             return String.Format("{0:yyyy/MM/dd HH:mm:ss}", _date_time);
         }
 
-        public string getAnoMesDiaSomente()
+        public string GetAnoMesDiaSomente()
         {
             return String.Format("{0:yyyy/MM/dd}", _date_time);
         }
 
-        public string getDiaMesAnoSomente()
+        public string GetDiaMesAnoSomente()
         {
             return String.Format("{0:dd/MM/yyyy}", _date_time);
         }
 
-        public string getHoraMinutoSegundo()
+        public string GetHoraMinutoSegundo()
         {
             return String.Format("{0:HH:mm:ss}", _date_time);
         }
@@ -180,39 +194,39 @@ namespace Jovemnf.DateTimeStamp
             get { return new MyDateTime( DateTime.Now ); }
         }
 
-        public int getDay()
+        public int GetDay()
         {
             return this._date_time.Day;
         }
 
-        public int getMonth()
+        public int GetMonth()
         {
             return this._date_time.Month;
         }
 
-        public int getYear()
+        public int GetYear()
         {
             return this._date_time.Year;
         }
 
-        public int getHour()
+        public int GetHour()
         {
             return this._date_time.Hour;
         }
 
-        public int getMinute()
+        public int GetMinute()
         {
             return this._date_time.Minute;
         }
 
-        public int getSecond()
+        public int GetSecond()
         {
             return this._date_time.Second;
         }
 
         public override string ToString()
         {
-            return getDiaMesAno();
+            return GetDiaMesAno();
         }
 
     }
