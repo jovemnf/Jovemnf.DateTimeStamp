@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jovemnf.DateTimeStamp
 {
@@ -39,8 +35,8 @@ namespace Jovemnf.DateTimeStamp
         {
             try
             {
-                int aux = Convert.ToInt32(now.GetYear() + "" + now.GetMonth().ToString().PadLeft(2, '0') + "" + now.GetDay().ToString().PadLeft(2, '0'));
-                int thisis = Convert.ToInt32(this.GetYear() + "" + this.GetMonth().ToString().PadLeft(2, '0') + "" + this.GetDay().ToString().PadLeft(2, '0'));
+                int aux = Convert.ToInt32(now._date_time.Year + "" + now._date_time.Month.ToString().PadLeft(2, '0') + "" + now._date_time.Day.ToString().PadLeft(2, '0'));
+                int thisis = Convert.ToInt32(this._date_time.Year + "" + this._date_time.Month.ToString().PadLeft(2, '0') + "" + this._date_time.Day.ToString().PadLeft(2, '0'));
                 return (aux > thisis) ? true : false;
             }
             catch (Exception e)

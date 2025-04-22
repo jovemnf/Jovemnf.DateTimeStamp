@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Jovemnf.DateTimeStamp</PackageId>
-    <Version>0.0.4</Version>
+    <Version>0.0.5</Version>
     <Authors>Jovemnf</Authors>
     <Company>Jovemnf</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -11,6 +11,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/jovemnf/Jovemnf.DateTimeStamp.git</RepositoryUrl>
     <DocumentationMarkdownURL>https://github.com/jovemnf/Jovemnf.DateTimeStamp/blob/master/README.md</DocumentationMarkdownURL>
+    <AssemblyVersion>0.0.5</AssemblyVersion>
   </PropertyGroup>
 
 </Project>

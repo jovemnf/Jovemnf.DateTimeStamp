@@ -12,14 +12,21 @@ namespace Jovemnf.DateTimeStamp
     public class MyDateTime: IComparable
     {
 
-        public DateTime _date_time;
+        protected DateTime _date_time;
+
+        public DateTime DateTime => _date_time;
 
         public MyDateTime( double timestamp )
         {
             _date_time = GetDefault();
             _date_time = _date_time.AddSeconds(timestamp);
         }
-        
+
+        public MyDateTime(int year, int month, int day, int hour, int minute, int second)
+        {
+            _date_time = new DateTime(year, month, day, hour, minute, second);
+        }
+
         public int CompareTo(object obj)
         {
             if (obj == null) return 1;
@@ -76,32 +83,17 @@ namespace Jovemnf.DateTimeStamp
 
         public static MyDateTime FromIsoDateByNode(string data)
         {
-            try
-            {
-                DateTime d;
-                DateTime.TryParseExact(data,
-                    @"yyyy-MM-dd\THH:mm:ss.fff\Z", CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal, out d);
-                return new MyDateTime(d);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            DateTime d;
+            DateTime.TryParseExact(data,
+                @"yyyy-MM-dd\THH:mm:ss.fff\Z", CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal, out d);
+            return new MyDateTime(d);
         }
 
         public static MyDateTime FromDateTime(string data, string format = @"yyyy-MM-dd HH:mm:ss")
         {
-            try
-            {
-                DateTime d;
-                DateTime.TryParseExact(data, format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out d);
-                return new MyDateTime(d);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            DateTime.TryParseExact(data, format, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var d);
+            return new MyDateTime(d);
         }
 
         public int HMin()
@@ -111,24 +103,16 @@ namespace Jovemnf.DateTimeStamp
 
         public MyDateTime ByStrToTime(string str)
         {
-            try
-            {
-                //Console.WriteLine(str);
-                RelativeDateParser r = new RelativeDateParser(_date_time);
-                DateTime d = r.Parse(str);
-                return new MyDateTime(d);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                throw e;
-            }
+            //Console.WriteLine(str);
+            var r = new RelativeDateParser(_date_time);
+            var d = r.Parse(str);
+            return new MyDateTime(d);
         }
 
         public double GetTimestamp()
         {
-            DateTime origin = GetDefault();
-            TimeSpan diff = _date_time - origin;
+            var origin = GetDefault();
+            var diff = _date_time - origin;
             return Math.Floor(diff.TotalSeconds);
         }
 
@@ -145,7 +129,7 @@ namespace Jovemnf.DateTimeStamp
 
         public TimeSpan GetDiff(DateTime date)
         {
-            TimeSpan diff = _date_time - date;
+            var diff = _date_time - date;
             return diff;
         }
 
@@ -189,41 +173,15 @@ namespace Jovemnf.DateTimeStamp
             return String.Format("{0:HH:mm:ss}", _date_time);
         }
 
+        public string GetHoraMinuto()
+        {
+            return String.Format("{0:HH:mm}", _date_time);
+        }
+
         static public MyDateTime Now
         {
             get { return new MyDateTime( DateTime.Now ); }
         }
-
-        public int GetDay()
-        {
-            return this._date_time.Day;
-        }
-
-        public int GetMonth()
-        {
-            return this._date_time.Month;
-        }
-
-        public int GetYear()
-        {
-            return this._date_time.Year;
-        }
-
-        public int GetHour()
-        {
-            return this._date_time.Hour;
-        }
-
-        public int GetMinute()
-        {
-            return this._date_time.Minute;
-        }
-
-        public int GetSecond()
-        {
-            return this._date_time.Second;
-        }
-
         public override string ToString()
         {
             return GetDiaMesAno();

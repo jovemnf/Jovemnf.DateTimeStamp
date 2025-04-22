@@ -201,7 +201,7 @@ namespace Jovemnf.DateTimeStamp
 
         public RelativeDateParser(MyDateTime dt)
         {
-            _datetime = dt._date_time;
+            _datetime = dt.DateTime;
         }
 
         private DateTime _datetime;
